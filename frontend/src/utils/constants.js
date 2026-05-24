@@ -8,7 +8,7 @@
 // Backend URL for socket.io-client connection.
 // In development, Vite proxy handles routing, so we use relative path.
 // In production, set this to the actual Flask server URL.
-export const BACKEND_URL = "http://localhost:5000";
+export const BACKEND_URL = "https://husnainriax-skywatch-backend.hf.space";
 
 // Socket.io reconnection settings
 export const SOCKET_RECONNECT_ATTEMPTS = 20;
