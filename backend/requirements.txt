@@ -1,0 +1,31 @@
+# ============================================================
+# ATC Monitoring System — Backend Dependencies
+# ============================================================
+# Install all at once:
+#   pip install -r requirements.txt
+#
+# Python version recommended: 3.10 or 3.11
+# ============================================================
+
+# --- Web Framework ---
+flask==3.0.3                  # Lightweight WSGI web framework
+
+# --- Real-Time Communication ---
+flask-socketio==5.3.6         # WebSocket support for Flask
+python-socketio==5.11.2       # Core SocketIO engine (flask-socketio depends on this)
+eventlet==0.36.1              # Async worker required by flask-socketio for concurrency
+
+# --- Cross-Origin Resource Sharing ---
+flask-cors==4.0.1             # Allows React frontend (port 5173) to call Flask (port 5000)
+
+# --- HTTP Client ---
+requests==2.32.3              # Used to call the OpenSky REST API
+
+# --- Environment Variables ---
+python-dotenv==1.0.1          # Loads .env file into os.environ
+
+# --- Background Scheduling ---
+apscheduler==3.10.4           # Runs the broadcaster job every 1 second
+
+# --- Testing ---
+pytest==8.2.0                 # Unit test runner

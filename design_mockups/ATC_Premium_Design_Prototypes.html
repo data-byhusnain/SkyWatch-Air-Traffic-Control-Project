@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATC Premium Design Prototypes</title>
+  <style>
+    :root {
+      --gallery-bg: #eef1f0;
+      --gallery-text: #18201f;
+      --gallery-muted: #65706d;
+      --gallery-line: #cbd5d1;
+      --cyan: #2dd4bf;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --blue: #38bdf8;
+      --ink: #101514;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(45, 212, 191, 0.08), transparent 32%),
+        linear-gradient(225deg, rgba(245, 158, 11, 0.08), transparent 30%),
+        var(--gallery-bg);
+      color: var(--gallery-text);
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .prototype-gallery {
+      min-height: 100vh;
+      padding: 24px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+    }
+
+    .gallery-top {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .gallery-title h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1;
+      color: #101514;
+    }
+
+    .gallery-title p {
+      margin: 10px 0 0;
+      max-width: 780px;
+      color: var(--gallery-muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--gallery-line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 8px;
+      box-shadow: 0 16px 50px rgba(16, 21, 20, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: 0;
+      color: #39413f;
+      background: transparent;
+      border-radius: 6px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      background: #101514;
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(16, 21, 20, 0.22);
+    }
+
+    .prototype-frame {
+      width: min(1500px, 100%);
+      min-height: 760px;
+      margin: 0 auto;
+      border: 1px solid rgba(16, 21, 20, 0.14);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(16, 21, 20, 0.18);
+      background: #101514;
+    }
+
+    .concept {
+      display: none;
+      min-height: 760px;
+    }
+
+    .concept.active {
+      display: grid;
+    }
+
+    .ops-shell {
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 248px minmax(520px, 1fr) 396px;
+    }
+
+    .nav-rail,
+    .ops-panel {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 52px;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 2px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .nav-group {
+      display: grid;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 7px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .nav-link svg,
+    .icon-btn svg,
+    .panel-title svg,
+    .metric svg {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+    }
+
+    .nav-foot {
+      margin-top: auto;
+      display: grid;
+      gap: 10px;
+    }
+
+    .state-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+    }
+
+    .map-stage {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .sector-map {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .sector-map::before,
+    .sector-map::after {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      pointer-events: none;
+    }
+
+    .scan {
+      position: absolute;
+      width: min(58vw, 760px);
+      aspect-ratio: 1;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .scan::before,
+    .scan::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .scan::before {
+      border: 1px solid currentColor;
+      opacity: 0.34;
+    }
+
+    .scan::after {
+      inset: 19%;
+      border: 1px dashed currentColor;
+      opacity: 0.42;
+    }
+
+    .range-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0.2;
+    }
+
+    .ring-1 { inset: 8%; }
+    .ring-2 { inset: 32%; }
+    .ring-3 { inset: 45%; }
+
+    .track {
+      position: absolute;
+      display: grid;
+      gap: 5px;
+      transform: translate(-50%, -50%);
+      font-family: var(--mono);
+      z-index: 2;
+    }
+
+    .track::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 18px solid currentColor;
+      transform: rotate(var(--heading, 42deg));
+      filter: drop-shadow(0 0 8px currentColor);
+      justify-self: center;
+    }
+
+    .track span {
+      white-space: nowrap;
+      padding: 4px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .track small {
+      display: block;
+      margin-top: 2px;
+      font-size: 9px;
+      opacity: 0.72;
+    }
+
+    .vector {
+      position: absolute;
+      height: 2px;
+      transform-origin: left center;
+      opacity: 0.72;
+    }
+
+    .hud-top,
+    .hud-bottom,
+    .map-tools {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-top {
+      left: 18px;
+      top: 18px;
+      right: 18px;
+      justify-content: space-between;
+    }
+
+    .hud-bottom {
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .map-tools {
+      left: 18px;
+      top: 78px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hud-chip,
+    .icon-btn,
+    .tool-toggle {
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid;
+      min-height: 36px;
+    }
+
+    .hud-chip {
+      padding: 0 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .icon-btn {
+      width: 36px;
+      justify-content: center;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .tool-toggle {
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .panel-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+      padding: 18px;
+      overflow: auto;
+    }
+
+    .ops-card,
+    .metric,
+    .strip,
+    .traffic-row,
+    .alert-item {
+      border: 1px solid;
+      border-radius: 8px;
+    }
+
+    .ops-card {
+      padding: 16px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .panel-title span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 76px;
+      padding: 12px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .metric label,
+    .field label,
+    .traffic-row label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+    }
+
+    .metric strong,
+    .field strong {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field strong {
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .traffic-list,
+    .alert-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .traffic-row {
+      display: grid;
+      grid-template-columns: minmax(90px, 1fr) 70px 70px 52px;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .traffic-row label {
+      font-family: var(--sans);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .alert-item {
+      padding: 12px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .alert-item strong {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .alert-item span {
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .strip {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .strip b {
+      font-family: var(--sans);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .action {
+      border: 1px solid;
+      border-radius: 7px;
+      min-height: 38px;
+      cursor: pointer;
+      font-weight: 900;
+      background: transparent;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spark {
+      height: 42px;
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      align-items: end;
+      gap: 3px;
+    }
+
+    .spark i {
+      display: block;
+      border-radius: 4px 4px 0 0;
+      min-height: 7px;
+      opacity: 0.9;
+    }
+
+    .concept-note {
+      position: absolute;
+      right: 18px;
+      top: 78px;
+      max-width: 300px;
+      border-radius: 8px;
+      border: 1px solid;
+      padding: 14px;
+      z-index: 5;
+    }
+
+    .concept-note strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 8px;
+    }
+
+    .concept-note p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    /* Concept 1: Command Glass */
+    .command {
+      --bg: #0b1010;
+      --panel: rgba(15, 22, 21, 0.92);
+      --panel-2: rgba(22, 32, 30, 0.84);
+      --line: rgba(98, 141, 132, 0.32);
+      --text: #edf8f5;
+      --muted: #8aa09a;
+      --accent: #2dd4bf;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .command .nav-rail,
+    .command .ops-panel {
+      background: linear-gradient(180deg, rgba(15, 22, 21, 0.98), rgba(9, 13, 13, 0.98));
+      border-color: var(--line);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .command .nav-rail { border-right: 1px solid var(--line); }
+    .command .ops-panel { border-left: 1px solid var(--line); }
+
+    .command .mark {
+      background: rgba(45, 212, 191, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(45, 212, 191, 0.42);
+      box-shadow: inset 0 0 24px rgba(45, 212, 191, 0.08);
+    }
+
+    .command .brand span,
+    .command .metric label,
+    .command .field label,
+    .command .traffic-row label,
+    .command .alert-item span,
+    .command .concept-note p {
+      color: var(--muted);
+    }
+
+    .command .nav-link { color: #a9bbb6; }
+    .command .nav-link.active,
+    .command .nav-link:hover {
+      background: rgba(45, 212, 191, 0.12);
+      color: #ffffff;
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .command .state-pill,
+    .command .hud-chip,
+    .command .icon-btn,
+    .command .tool-toggle,
+    .command .ops-card,
+    .command .metric,
+    .command .strip,
+    .command .traffic-row,
+    .command .alert-item,
+    .command .concept-note,
+    .command .action {
+      background: var(--panel);
+      border-color: var(--line);
+      color: var(--text);
+      backdrop-filter: blur(16px);
+    }
+
+    .command .sector-map {
+      background:
+        radial-gradient(circle at 52% 50%, rgba(45, 212, 191, 0.15), transparent 22%),
+        linear-gradient(rgba(45, 212, 191, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 212, 191, 0.055) 1px, transparent 1px),
+        #07100f;
+      background-size: auto, 46px 46px, 46px 46px, auto;
+    }
+
+    .command .sector-map::before {
+      background:
+        linear-gradient(110deg, transparent 49%, rgba(45, 212, 191, 0.5) 50%, transparent 51%),
+        radial-gradient(circle at 50% 50%, transparent 0 28%, rgba(45, 212, 191, 0.08) 29%, transparent 30%);
+      opacity: 0.45;
+    }
+
+    .command .sector-map::after {
+      background:
+        linear-gradient(26deg, transparent 0 46%, rgba(245, 158, 11, 0.18) 47% 48%, transparent 49%),
+        linear-gradient(153deg, transparent 0 57%, rgba(56, 189, 248, 0.16) 58% 59%, transparent 60%);
+    }
+
+    .command .scan { color: var(--accent); }
+    .command .track { color: var(--accent); }
+    .command .track.alert { color: var(--red); }
+    .command .track.warn { color: var(--amber); }
+    .command .track span {
+      background: rgba(8, 13, 13, 0.88);
+      border: 1px solid currentColor;
+      color: #ffffff;
+    }
+    .command .vector { background: currentColor; box-shadow: 0 0 14px currentColor; }
+    .command .metric strong,
+    .command .field strong { color: #ffffff; }
+    .command .alert-item.red { border-color: rgba(239, 68, 68, 0.65); background: rgba(239, 68, 68, 0.09); }
+    .command .alert-item.yellow { border-color: rgba(245, 158, 11, 0.55); background: rgba(245, 158, 11, 0.08); }
+    .command .traffic-row.selected { border-color: rgba(45, 212, 191, 0.74); background: rgba(45, 212, 191, 0.1); }
+    .command .action.primary { background: var(--accent); color: #05100f; border-color: var(--accent); }
+    .command .spark i { background: linear-gradient(180deg, var(--accent), rgba(45, 212, 191, 0.18)); }
+
+    /* Concept 2: Daylight Ops */
+    .daylight {
+      --bg: #f5f7f4;
+      --panel: rgba(255, 255, 255, 0.94);
+      --panel-2: #eef4ef;
+      --line: #c7d4cf;
+      --text: #18201f;
+      --muted: #6a7873;
+      --accent: #0f766e;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .daylight .nav-rail,
+    .daylight .ops-panel {
+      background: #ffffff;
+      border-color: var(--line);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .daylight .nav-rail { border-right: 1px solid var(--line); }
+    .daylight .ops-panel { border-left: 1px solid var(--line); background: #f8faf8; }
+
+    .daylight .mark {
+      background: #0f766e;
+      color: #ffffff;
+      box-shadow: 0 12px 26px rgba(15, 118, 110, 0.25);
+    }
+
+    .daylight .brand span,
+    .daylight .metric label,
+    .daylight .field label,
+    .daylight .traffic-row label,
+    .daylight .alert-item span,
+    .daylight .concept-note p {
+      color: var(--muted);
+    }
+
+    .daylight .nav-link { color: #53605c; }
+    .daylight .nav-link.active,
+    .daylight .nav-link:hover {
+      background: #e4f4f1;
+      color: #0f766e;
+    }
+
+    .daylight .state-pill,
+    .daylight .hud-chip,
+    .daylight .icon-btn,
+    .daylight .tool-toggle,
+    .daylight .ops-card,
+    .daylight .metric,
+    .daylight .strip,
+    .daylight .traffic-row,
+    .daylight .alert-item,
+    .daylight .concept-note,
+    .daylight .action {
+      background: var(--panel);
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: 0 10px 30px rgba(31, 48, 43, 0.06);
+    }
+
+    .daylight .sector-map {
+      background:
+        radial-gradient(circle at 48% 45%, rgba(15, 118, 110, 0.12), transparent 24%),
+        linear-gradient(rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+        #e7eeea;
+      background-size: auto, 52px 52px, 52px 52px, auto;
+    }
+
+    .daylight .sector-map::before {
+      background:
+        linear-gradient(108deg, transparent 48%, rgba(15, 118, 110, 0.22) 49%, transparent 50%),
+        linear-gradient(22deg, transparent 55%, rgba(245, 158, 11, 0.22) 56%, transparent 57%);
+    }
+
+    .daylight .scan { color: #0f766e; }
+    .daylight .track { color: #0f766e; }
+    .daylight .track.alert { color: var(--red); }
+    .daylight .track.warn { color: var(--amber); }
+    .daylight .track span {
+      background: #ffffff;
+      border: 1px solid currentColor;
+      color: #18201f;
+      box-shadow: 0 10px 24px rgba(31, 48, 43, 0.12);
+    }
+    .daylight .vector { background: currentColor; }
+    .daylight .traffic-row.selected { border-color: #0f766e; background: #e4f4f1; }
+    .daylight .alert-item.red { border-color: rgba(239, 68, 68, 0.45); background: #fff1f1; }
+    .daylight .alert-item.yellow { border-color: rgba(245, 158, 11, 0.48); background: #fff8ea; }
+    .daylight .action.primary { background: #0f766e; color: #ffffff; border-color: #0f766e; }
+    .daylight .spark i { background: linear-gradient(180deg, #0f766e, rgba(15, 118, 110, 0.12)); }
+
+    /* Concept 3: Briefing Deck */
+    .briefing {
+      --bg: #161611;
+      --panel: rgba(250, 250, 244, 0.92);
+      --line: rgba(236, 232, 211, 0.2);
+      --dark-line: #d4cfb9;
+      --text: #24241c;
+      --muted: #6f6b59;
+      --accent: #c0842b;
+      background:
+        linear-gradient(90deg, #161611 0 64%, #f4f0e4 64% 100%);
+      color: var(--text);
+    }
+
+    .briefing.ops-shell {
+      grid-template-columns: 104px minmax(620px, 1fr) 430px;
+    }
+
+    .briefing .nav-rail {
+      background: #161611;
+      border-right: 1px solid rgba(236, 232, 211, 0.18);
+      padding: 18px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .briefing .brand {
+      justify-content: center;
+    }
+
+    .briefing .brand div:not(.mark),
+    .briefing .nav-link span {
+      display: none;
+    }
+
+    .briefing .mark {
+      background: #f4f0e4;
+      color: #161611;
+    }
+
+    .briefing .nav-group {
+      width: 100%;
+      align-items: center;
+    }
+
+    .briefing .nav-link {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      justify-content: center;
+      color: #aaa38e;
+    }
+
+    .briefing .nav-link.active,
+    .briefing .nav-link:hover {
+      background: rgba(192, 132, 43, 0.18);
+      color: #f4f0e4;
+    }
+
+    .briefing .nav-foot {
+      width: 100%;
+    }
+
+    .briefing .state-pill {
+      padding: 0;
+      justify-content: center;
+      color: #f4f0e4;
+      border: 1px solid rgba(236, 232, 211, 0.18);
+      background: rgba(236, 232, 211, 0.05);
+    }
+
+    .briefing .state-pill span {
+      display: none;
+    }
+
+    .briefing .map-stage {
+      background: #161611;
+    }
+
+    .briefing .sector-map {
+      inset: 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(236, 232, 211, 0.18);
+      background:
+        radial-gradient(circle at 55% 48%, rgba(192, 132, 43, 0.22), transparent 25%),
+        linear-gradient(rgba(236, 232, 211, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(236, 232, 211, 0.07) 1px, transparent 1px),
+        #11110d;
+      background-size: auto, 44px 44px, 44px 44px, auto;
+    }
+
+    .briefing .sector-map::before {
+      background:
+        linear-gradient(118deg, transparent 50%, rgba(192, 132, 43, 0.5) 51%, transparent 52%),
+        linear-gradient(24deg, transparent 45%, rgba(45, 212, 191, 0.25) 46%, transparent 47%);
+    }
+
+    .briefing .scan { color: #c0842b; }
+    .briefing .track { color: #f2c166; }
+    .briefing .track.alert { color: var(--red); }
+    .briefing .track.warn { color: var(--amber); }
+    .briefing .track span {
+      background: rgba(22, 22, 17, 0.94);
+      border: 1px solid currentColor;
+      color: #fff9e8;
+    }
+    .briefing .vector { background: currentColor; }
+
+    .briefing .hud-chip,
+    .briefing .icon-btn,
+    .briefing .tool-toggle {
+      background: rgba(22, 22, 17, 0.88);
+      color: #f4f0e4;
+      border-color: rgba(236, 232, 211, 0.2);
+    }
+
+    .briefing .ops-panel {
+      background: #f4f0e4;
+      border-left: 1px solid #d4cfb9;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .briefing .ops-card,
+    .briefing .metric,
+    .briefing .strip,
+    .briefing .traffic-row,
+    .briefing .alert-item,
+    .briefing .concept-note,
+    .briefing .action {
+      background: rgba(255, 255, 251, 0.82);
+      border-color: var(--dark-line);
+      color: var(--text);
+      box-shadow: 0 14px 40px rgba(48, 40, 24, 0.08);
+    }
+
+    .briefing .concept-note {
+      background: rgba(22, 22, 17, 0.9);
+      border-color: rgba(236, 232, 211, 0.18);
+      color: #f4f0e4;
+    }
+
+    .briefing .brand span,
+    .briefing .metric label,
+    .briefing .field label,
+    .briefing .traffic-row label,
+    .briefing .alert-item span,
+    .briefing .concept-note p {
+      color: var(--muted);
+    }
+
+    .briefing .concept-note p { color: #b9b098; }
+    .briefing .traffic-row.selected { border-color: #c0842b; background: #fff5dc; }
+    .briefing .alert-item.red { border-color: rgba(239, 68, 68, 0.45); background: #fff0ef; }
+    .briefing .alert-item.yellow { border-color: rgba(192, 132, 43, 0.55); background: #fff5dc; }
+    .briefing .action.primary { background: #24241c; color: #fff9e8; border-color: #24241c; }
+    .briefing .spark i { background: linear-gradient(180deg, #c0842b, rgba(192, 132, 43, 0.16)); }
+
+    @media (max-width: 1100px) {
+      .prototype-gallery {
+        padding: 14px;
+      }
+
+      .gallery-top {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .prototype-frame,
+      .concept,
+      .ops-shell {
+        min-height: 1000px;
+      }
+
+      .ops-shell,
+      .briefing.ops-shell {
+        grid-template-columns: 82px minmax(0, 1fr);
+        grid-template-rows: 640px auto;
+      }
+
+      .ops-panel {
+        grid-column: 1 / -1;
+      }
+
+      .nav-rail {
+        padding: 12px;
+      }
+
+      .brand div:not(.mark),
+      .nav-link span,
+      .state-pill span {
+        display: none;
+      }
+
+      .nav-link {
+        justify-content: center;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+      }
+
+      .concept-note {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .prototype-frame,
+      .concept,
+      .ops-shell {
+        min-height: 1120px;
+      }
+
+      .ops-shell,
+      .briefing.ops-shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 540px auto;
+      }
+
+      .nav-rail,
+      .briefing .nav-rail {
+        min-height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        overflow-x: auto;
+      }
+
+      .nav-group,
+      .briefing .nav-group {
+        display: flex;
+        margin: 0;
+        width: auto;
+      }
+
+      .nav-foot {
+        margin-left: auto;
+        margin-top: 0;
+      }
+
+      .panel-stack {
+        padding: 12px;
+      }
+
+      .kpi-grid,
+      .field-grid,
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+
+      .traffic-row {
+        grid-template-columns: minmax(95px, 1fr) 62px 62px;
+      }
+
+      .traffic-row span:last-child {
+        display: none;
+      }
+
+      .hud-top,
+      .hud-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="prototype-gallery">
+    <header class="gallery-top">
+      <div class="gallery-title">
+        <h1>ATC Monitoring Design Prototypes</h1>
+        <p>Three non-production visual directions for the current React/Leaflet ATC system. Each keeps the left navigation, live map, alerts, selected aircraft telemetry, and sector traffic model already present in the project.</p>
+      </div>
+      <nav class="tabs" aria-label="Prototype options">
+        <button class="tab active" data-target="command">Command Glass</button>
+        <button class="tab" data-target="daylight">Daylight Ops</button>
+        <button class="tab" data-target="briefing">Briefing Deck</button>
+      </nav>
+    </header>
+
+    <section class="prototype-frame">
+      <article class="concept command ops-shell active" id="command">
+        <aside class="nav-rail">
+          <div class="brand">
+            <div class="mark">SW</div>
+            <div>
+              <strong>SKYWATCH</strong>
+              <span>PAK-SECTOR LIVE</span>
+            </div>
+          </div>
+          <nav class="nav-group">
+            <div class="nav-link active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v18M3 12h18"/></svg>
+              <span>Radar Ops</span>
+            </div>
+            <div class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16v-2l-8-5V3.5a2 2 0 0 0-4 0V9l-8 5v2l8-2.4V19l-2 1.5V22l4-1 4 1v-1.5L14 19v-5.4L22 16Z"/></svg>
+              <span>Live Traffic</span>
+            </div>
+            <div class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9M15 15h6"/></svg>
+              <span>Analytics</span>
+            </div>
+            <div class="nav-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16l3-5 3 2 4-7"/></svg>
+              <span>Simulation</span>
+            </div>
+          </nav>
+          <div class="nav-foot">
+            <div class="state-pill"><span>SOCKET</span><b>ONLINE</b><i class="dot"></i></div>
+            <div class="state-pill"><span>MODE</span><b>LIVE</b></div>
+          </div>
+        </aside>
+
+        <section class="map-stage">
+          <div class="sector-map"></div>
+          <div class="scan">
+            <i class="range-ring ring-1"></i>
+            <i class="range-ring ring-2"></i>
+            <i class="range-ring ring-3"></i>
+          </div>
+          <div class="hud-top">
+            <div class="hud-chip">PK-KHI CONTROL / ZONE 07</div>
+            <div>
+              <button class="icon-btn" title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/></svg></button>
+              <button class="icon-btn" title="Layers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></button>
+              <button class="icon-btn" title="Focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/></svg></button>
+            </div>
+          </div>
+          <div class="map-tools">
+            <div class="tool-toggle">WX</div>
+            <div class="tool-toggle">TRK</div>
+            <div class="tool-toggle">ALT</div>
+          </div>
+          <div class="concept-note">
+            <strong>Direction 1</strong>
+            <p>Best for a serious command-center feel: dark, high contrast, radar-first, and dramatic enough for demos without becoming decorative.</p>
+          </div>
+          <div class="track" style="left:47%;top:45%;--heading:40deg;"><span>PIA302<small>FL320 / 451KT</small></span></div>
+          <div class="vector" style="left:48%;top:47%;width:160px;transform:rotate(40deg);color:#2dd4bf;"></div>
+          <div class="track alert" style="left:59%;top:35%;--heading:128deg;"><span>UAE611<small>FL315 / 438KT</small></span></div>
+          <div class="vector" style="left:59%;top:38%;width:128px;transform:rotate(128deg);color:#ef4444;"></div>
+          <div class="track warn" style="left:35%;top:62%;--heading:72deg;"><span>QTR642<small>FL280 / 422KT</small></span></div>
+          <div class="track" style="left:70%;top:63%;--heading:300deg;"><span>SIA771<small>FL370 / 470KT</small></span></div>
+          <div class="track" style="left:29%;top:30%;--heading:18deg;"><span>THY708<small>FL340 / 460KT</small></span></div>
+          <div class="hud-bottom">
+            <div class="hud-chip">LAT 30.00 / LON 70.00 / RANGE 420NM</div>
+            <div class="strip"><b>Conflict</b><span style="color:#ef4444">2 aircraft / 04:18 CPA</span></div>
+          </div>
+        </section>
+
+        <aside class="ops-panel">
+          <div class="panel-stack">
+            <div class="ops-card">
+              <div class="panel-title"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 8-6-16-3 8H2"/></svg>Sector Pulse</span><b>LIVE</b></div>
+              <div class="kpi-grid">
+                <div class="metric"><label>Aircraft</label><strong>087</strong></div>
+                <div class="metric"><label>Alerts</label><strong style="color:#ef4444">02</strong></div>
+                <div class="metric"><label>Avg Speed</label><strong>438 kt</strong></div>
+                <div class="metric"><label>Sim Drift</label><strong>0.8s</strong></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Active Selection</span><b>LOCKED</b></div>
+              <div class="field-grid">
+                <div class="field"><label>Callsign</label><strong>PIA302</strong></div>
+                <div class="field"><label>ICAO24</label><strong>7609A2</strong></div>
+                <div class="field"><label>Altitude</label><strong>32,000 ft</strong></div>
+                <div class="field"><label>Heading</label><strong>040 deg</strong></div>
+                <div class="field"><label>Velocity</label><strong>451 kt</strong></div>
+                <div class="field"><label>Country</label><strong>Pakistan</strong></div>
+              </div>
+              <div class="button-row">
+                <button class="action primary">Direct</button>
+                <button class="action">Handoff</button>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Collision Monitor</span><b>HAVERSINE</b></div>
+              <div class="alert-list">
+                <div class="alert-item red"><strong>RED / UAE611 <em>4.2 km</em></strong><span>Converging with PIA302. Closest point in 04:18.</span></div>
+                <div class="alert-item yellow"><strong>YELLOW / QTR642 <em>8.7 km</em></strong><span>Crossing path at FL280. Maintain watch.</span></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Sector Traffic</span><b>PRIORITY</b></div>
+              <div class="traffic-list">
+                <div class="traffic-row selected"><span><label>Flight</label>PIA302</span><span>320</span><span>451</span><span>040</span></div>
+                <div class="traffic-row"><span><label>Flight</label>UAE611</span><span>315</span><span>438</span><span>128</span></div>
+                <div class="traffic-row"><span><label>Flight</label>QTR642</span><span>280</span><span>422</span><span>072</span></div>
+                <div class="traffic-row"><span><label>Flight</label>SIA771</span><span>370</span><span>470</span><span>300</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </article>
+
+      <article class="concept daylight ops-shell" id="daylight">
+        <aside class="nav-rail">
+          <div class="brand">
+            <div class="mark">SW</div>
+            <div>
+              <strong>SKYWATCH</strong>
+              <span>DAY OPS CENTER</span>
+            </div>
+          </div>
+          <nav class="nav-group">
+            <div class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v18M3 12h18"/></svg><span>Radar Ops</span></div>
+            <div class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16v-2l-8-5V3.5a2 2 0 0 0-4 0V9l-8 5v2l8-2.4V19l-2 1.5V22l4-1 4 1v-1.5L14 19v-5.4L22 16Z"/></svg><span>Traffic</span></div>
+            <div class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9M15 15h6"/></svg><span>Analytics</span></div>
+            <div class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16l3-5 3 2 4-7"/></svg><span>Reports</span></div>
+          </nav>
+          <div class="nav-foot">
+            <div class="state-pill"><span>OPEN SKY</span><b>SYNC</b><i class="dot"></i></div>
+          </div>
+        </aside>
+        <section class="map-stage">
+          <div class="sector-map"></div>
+          <div class="scan"><i class="range-ring ring-1"></i><i class="range-ring ring-2"></i><i class="range-ring ring-3"></i></div>
+          <div class="hud-top">
+            <div class="hud-chip">KARACHI FIR / DAYLIGHT MAP</div>
+            <div>
+              <button class="icon-btn" title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/></svg></button>
+              <button class="icon-btn" title="Layers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></button>
+            </div>
+          </div>
+          <div class="map-tools"><div class="tool-toggle">Map</div><div class="tool-toggle">WX</div><div class="tool-toggle">CPA</div></div>
+          <div class="concept-note"><strong>Direction 2</strong><p>Best for daily use and grading sessions: bright, readable, calmer, and closer to a modern operations dashboard.</p></div>
+          <div class="track" style="left:47%;top:45%;--heading:40deg;"><span>PIA302<small>FL320 / 451KT</small></span></div>
+          <div class="vector" style="left:48%;top:47%;width:160px;transform:rotate(40deg);color:#0f766e;"></div>
+          <div class="track alert" style="left:59%;top:35%;--heading:128deg;"><span>UAE611<small>FL315 / 438KT</small></span></div>
+          <div class="vector" style="left:59%;top:38%;width:128px;transform:rotate(128deg);color:#ef4444;"></div>
+          <div class="track warn" style="left:35%;top:62%;--heading:72deg;"><span>QTR642<small>FL280 / 422KT</small></span></div>
+          <div class="track" style="left:70%;top:63%;--heading:300deg;"><span>SIA771<small>FL370 / 470KT</small></span></div>
+          <div class="hud-bottom"><div class="hud-chip">CENTER 30.00 / 70.00</div><div class="strip"><b>Next API Sync</b><span>09 seconds</span></div></div>
+        </section>
+        <aside class="ops-panel">
+          <div class="panel-stack">
+            <div class="ops-card">
+              <div class="panel-title"><span>Operational Summary</span><b>NORMAL</b></div>
+              <div class="kpi-grid">
+                <div class="metric"><label>Aircraft</label><strong>087</strong></div>
+                <div class="metric"><label>Conflicts</label><strong style="color:#ef4444">02</strong></div>
+                <div class="metric"><label>Coverage</label><strong>420 nm</strong></div>
+                <div class="metric"><label>Latency</label><strong>0.8s</strong></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Track Detail</span><b>SELECTED</b></div>
+              <div class="field-grid">
+                <div class="field"><label>Callsign</label><strong>PIA302</strong></div>
+                <div class="field"><label>Route</label><strong>KHI-LHE</strong></div>
+                <div class="field"><label>Altitude</label><strong>32,000 ft</strong></div>
+                <div class="field"><label>Speed</label><strong>451 kt</strong></div>
+              </div>
+              <div class="button-row"><button class="action primary">Focus Track</button><button class="action">Clear</button></div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Alerts</span><b>2 ACTIVE</b></div>
+              <div class="alert-list">
+                <div class="alert-item red"><strong>Minimum separation risk <em>4.2 km</em></strong><span>UAE611 and PIA302 trending below red threshold.</span></div>
+                <div class="alert-item yellow"><strong>Proximity watch <em>8.7 km</em></strong><span>QTR642 crossing within yellow threshold window.</span></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Traffic Load</span><b>LAST 20S</b></div>
+              <div class="spark"><i style="height:26%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:80%"></i><i style="height:54%"></i><i style="height:38%"></i><i style="height:48%"></i><i style="height:82%"></i><i style="height:76%"></i><i style="height:44%"></i><i style="height:64%"></i><i style="height:36%"></i><i style="height:58%"></i><i style="height:74%"></i><i style="height:68%"></i><i style="height:50%"></i><i style="height:42%"></i><i style="height:66%"></i></div>
+            </div>
+          </div>
+        </aside>
+      </article>
+
+      <article class="concept briefing ops-shell" id="briefing">
+        <aside class="nav-rail">
+          <div class="brand"><div class="mark">SW</div><div><strong>SKYWATCH</strong><span>BRIEFING</span></div></div>
+          <nav class="nav-group">
+            <div class="nav-link active" title="Radar Ops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v18M3 12h18"/></svg><span>Radar</span></div>
+            <div class="nav-link" title="Traffic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16v-2l-8-5V3.5a2 2 0 0 0-4 0V9l-8 5v2l8-2.4V19l-2 1.5V22l4-1 4 1v-1.5L14 19v-5.4L22 16Z"/></svg><span>Traffic</span></div>
+            <div class="nav-link" title="Analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9M15 15h6"/></svg><span>Analytics</span></div>
+          </nav>
+          <div class="nav-foot"><div class="state-pill"><span>OK</span><i class="dot"></i></div></div>
+        </aside>
+        <section class="map-stage">
+          <div class="sector-map"></div>
+          <div class="scan"><i class="range-ring ring-1"></i><i class="range-ring ring-2"></i><i class="range-ring ring-3"></i></div>
+          <div class="hud-top"><div class="hud-chip">EXECUTIVE BRIEF / SECTOR RISK</div><div><button class="icon-btn" title="Export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></button></div></div>
+          <div class="concept-note"><strong>Direction 3</strong><p>Best for presentations: cinematic map, compact nav, premium reporting panel, and a stronger story around simulation and risk.</p></div>
+          <div class="track" style="left:46%;top:44%;--heading:40deg;"><span>PIA302<small>FL320 / 451KT</small></span></div>
+          <div class="vector" style="left:47%;top:46%;width:170px;transform:rotate(40deg);color:#f2c166;"></div>
+          <div class="track alert" style="left:59%;top:34%;--heading:128deg;"><span>UAE611<small>FL315 / 438KT</small></span></div>
+          <div class="track warn" style="left:35%;top:62%;--heading:72deg;"><span>QTR642<small>FL280 / 422KT</small></span></div>
+          <div class="track" style="left:69%;top:63%;--heading:300deg;"><span>SIA771<small>FL370 / 470KT</small></span></div>
+          <div class="hud-bottom"><div class="hud-chip">DEAD RECKONING ACTIVE</div><div class="hud-chip">RISK INDEX 74</div></div>
+        </section>
+        <aside class="ops-panel">
+          <div class="panel-stack">
+            <div class="ops-card">
+              <div class="panel-title"><span>Sector Briefing</span><b>LIVE</b></div>
+              <div class="strip"><b>Primary Risk</b><span>PIA302 / UAE611 separation</span></div>
+              <div class="button-row"><button class="action primary">Present View</button><button class="action">Export</button></div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Risk Metrics</span><b>NOW</b></div>
+              <div class="kpi-grid">
+                <div class="metric"><label>Risk Index</label><strong>74</strong></div>
+                <div class="metric"><label>CPA</label><strong>04:18</strong></div>
+                <div class="metric"><label>Red</label><strong style="color:#ef4444">01</strong></div>
+                <div class="metric"><label>Yellow</label><strong style="color:#c0842b">01</strong></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Simulation Health</span><b>STABLE</b></div>
+              <div class="field-grid">
+                <div class="field"><label>Physics Tick</label><strong>1.0 sec</strong></div>
+                <div class="field"><label>Render</label><strong>60 fps</strong></div>
+                <div class="field"><label>API Gap</label><strong>15 sec</strong></div>
+                <div class="field"><label>Fallback</label><strong>Ready</strong></div>
+              </div>
+            </div>
+            <div class="ops-card">
+              <div class="panel-title"><span>Priority Traffic</span><b>4 TRACKS</b></div>
+              <div class="traffic-list">
+                <div class="traffic-row selected"><span><label>Flight</label>PIA302</span><span>320</span><span>451</span><span>040</span></div>
+                <div class="traffic-row"><span><label>Flight</label>UAE611</span><span>315</span><span>438</span><span>128</span></div>
+                <div class="traffic-row"><span><label>Flight</label>QTR642</span><span>280</span><span>422</span><span>072</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const concepts = document.querySelectorAll(".concept");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.target;
+        tabs.forEach((item) => item.classList.toggle("active", item === tab));
+        concepts.forEach((concept) => concept.classList.toggle("active", concept.id === target));
+      });
+    });
+  </script>
+</body>
+</html>

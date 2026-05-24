@@ -1,0 +1,70 @@
+/* ============================================================
+   Scrolling Website Layout
+   ============================================================ */
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.radar-layout {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  height: 600px; /* Base height for the radar view */
+}
+
+/* Map Section */
+.map-section {
+  flex: 1;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  position: relative;
+}
+
+/* Data Section (Right Side) */
+.data-section {
+  width: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden; /* Prevent expanding beyond layout height */
+}
+
+/* Analytics overlay */
+.analytics-section {
+  flex: 1;
+  width: 100%;
+  background: var(--bg-glass-strong);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+  border: var(--glass-border);
+  padding: 24px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 1024px) {
+  .radar-layout {
+    flex-direction: column;
+  }
+  
+  .map-section {
+    width: 100%;
+    height: 500px;
+  }
+
+  .data-section {
+    width: 100%;
+    position: static;
+  }
+}

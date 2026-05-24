@@ -1,0 +1,87 @@
+/* We rely on the global .card and .card-header defined in AircraftList.css (since React imports both globally). 
+   If isolated, it inherits the premium glassmorphic base. */
+
+.sac-close-btn {
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sac-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.05);
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+  font-size: 14px;
+}
+
+.data-row:last-child {
+  border-bottom: none;
+}
+
+.data-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.data-value {
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(249, 115, 22, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--color-secondary);
+  color: #ffffff;
+}
+

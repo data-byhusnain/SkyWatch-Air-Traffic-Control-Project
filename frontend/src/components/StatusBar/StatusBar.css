@@ -1,0 +1,119 @@
+/* ============================================================
+   StatusBar.css -- Top navigation/status bar styling
+   ============================================================ */
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-text);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.status-bar__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-safe);
+}
+
+.status-bar__title-icon {
+  font-size: 18px;
+}
+
+.status-bar__metrics {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.status-bar__metric {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-bar__label {
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.status-bar__value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.status-bar__value--safe { color: var(--color-safe); }
+.status-bar__value--warn { color: var(--color-warn); }
+.status-bar__value--danger { color: var(--color-danger); }
+
+/* Connection indicator dot */
+.status-bar__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.status-bar__dot--connected {
+  background: var(--color-safe);
+  box-shadow: 0 0 6px var(--color-safe);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.status-bar__dot--disconnected {
+  background: var(--color-danger);
+  box-shadow: 0 0 6px var(--color-danger);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Badge for data source */
+.status-bar__badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.status-bar__badge--live {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--color-safe);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.status-bar__badge--simulated {
+  background: rgba(255, 204, 0, 0.15);
+  color: var(--color-warn);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.status-bar__badge--demo {
+  background: rgba(100, 180, 255, 0.15);
+  color: #64b4ff;
+  border: 1px solid rgba(100, 180, 255, 0.3);
+}
+
+.status-bar__badge--offline {
+  background: rgba(255, 68, 68, 0.15);
+  color: var(--color-danger);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}

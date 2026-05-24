@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Premium Dark Cockpit Theme Colors */
+  --color-dark: #0f172a;
+  --color-primary: #f97316; /* Sunset Orange */
+  --color-secondary: #ea580c;
+  --color-light: #1e293b; /* Darker panels */
+  --bg-app: #0b1121; /* Deep cockpit night */
+
+  /* Dark Glassmorphism Variables */
+  --bg-glass: rgba(15, 23, 42, 0.75);
+  --bg-glass-strong: rgba(15, 23, 42, 0.9);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-border-light: 1px solid rgba(255, 255, 255, 0.05);
+  --glass-blur: blur(24px) saturate(120%);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-shadow-hover: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+
+  /* Typography */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  /* Status Colors */
+  --color-safe: #10b981;
+  --color-warn: #f59e0b;
+  --color-danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --warn-bg: rgba(245, 158, 11, 0.15);
+  --safe-bg: rgba(16, 185, 129, 0.15);
+
+  --font-mono: "JetBrains Mono", "Consolas", "Courier New", monospace;
+  --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base App Layout - Scrollable */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.text-safe { color: var(--color-safe); }
+.text-warn { color: var(--color-warn); }
+.text-danger { color: var(--color-danger); }
+.text-dim { color: var(--text-muted); }
+
+::selection {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--color-dark);
+}
+
+/* Custom Scrollbar for Glass Panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
+
+/* Utility Animations */
+@keyframes slideInGlass {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseAlert {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

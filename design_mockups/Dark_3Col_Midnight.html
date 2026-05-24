@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Column Midnight Dark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0B101E;       /* Very dark navy */
+            --bg-panel: #151C2C;      /* Slightly lighter navy for sidebars */
+            --bg-card: #1D263B;       /* Cards background */
+            --border: #2A3655;        /* Subtle blueish border */
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --accent: #38BDF8;        /* Light blue accent */
+            --accent-bg: rgba(56, 189, 248, 0.1);
+            --danger: #EF4444;
+            --warning: #F59E0B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
+        
+        /* Left Sidebar */
+        .sidebar-left { width: 240px; background: var(--bg-panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; }
+        .logo-area { margin-bottom: 40px; }
+        .logo-title { font-size: 18px; font-weight: 700; color: var(--text-main); letter-spacing: 1px; }
+        .logo-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        
+        .nav-menu { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .nav-item { padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+        .nav-item:hover { color: var(--text-main); background: rgba(255,255,255,0.03); }
+        .nav-item.active { background: var(--accent-bg); color: var(--accent); border-left: 3px solid var(--accent); }
+        
+        .sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+        .btn-emergency { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger); padding: 12px; border-radius: 8px; font-weight: 600; font-size: 13px; text-align: center; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-emergency:hover { background: var(--danger); color: white; }
+        
+        /* Map Area */
+        .map-center { flex: 1; position: relative; background: #070B14; overflow: hidden; }
+        .map-grid { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5; }
+        
+        .map-overlay-box { position: absolute; top: 20px; left: 20px; background: var(--bg-card); padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; }
+        .map-overlay-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .map-overlay-item:last-child { margin-bottom: 0; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        
+        /* Mock Plane */
+        .plane { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .plane-icon { width: 24px; height: 24px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2338BDF8"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>'); transform: rotate(45deg); filter: drop-shadow(0 0 5px rgba(56,189,248,0.5)); }
+        .plane-label { background: var(--bg-card); border: 1px solid var(--border); padding: 5px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; }
+        
+        /* Right Sidebar */
+        .sidebar-right { width: 360px; background: var(--bg-panel); border-left: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
+        
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .card-header { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+        
+        .data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { color: var(--text-muted); }
+        .data-value { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+        
+        .action-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-main); }
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+        
+        .alert-box { background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--warning); padding: 15px; border-radius: 4px; margin-bottom: 10px; }
+        .alert-title { color: var(--warning); font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+        .alert-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        
+        /* Table */
+        .table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .table th { text-align: left; padding: 10px 5px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+        .table td { padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.02); font-family: 'JetBrains Mono', monospace; }
+        .table tr:hover td { background: rgba(255,255,255,0.02); }
+        .text-green { color: #34D399; }
+    </style>
+</head>
+<body>
+    <div class="sidebar-left">
+        <div class="logo-area">
+            <div class="logo-title">ATC_NEXUS</div>
+            <div class="logo-sub">Sector 7-G Active</div>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item active"><span style="font-size: 16px;">◉</span> Radar</div>
+            <div class="nav-item">✈ Traffic</div>
+            <div class="nav-item">⊞ Sectors</div>
+            <div class="nav-item">↺ History</div>
+            <div class="nav-item">📊 Reports</div>
+        </div>
+        <div class="sidebar-bottom">
+            <div class="btn-emergency">Emergency Override</div>
+            <div class="nav-item">? Support</div>
+            <div class="nav-item">≡ Logs</div>
+        </div>
+    </div>
+    
+    <div class="map-center">
+        <div class="map-grid"></div>
+        <div class="map-overlay-box">
+            <div class="map-overlay-item"><div class="dot" style="background: var(--accent)"></div> Selected Track</div>
+            <div class="map-overlay-item"><div class="dot" style="background: var(--text-muted)"></div> Standard Track</div>
+        </div>
+        
+        <div class="plane">
+            <div class="plane-label">
+                UA1492<br>
+                <span style="color:var(--text-muted); font-size:9px;">FL320 | 450kts</span>
+            </div>
+            <div class="plane-icon"></div>
+        </div>
+    </div>
+    
+    <div class="sidebar-right">
+        <!-- Active Selection Card -->
+        <div class="card">
+            <div class="card-header">✈ Active Selection</div>
+            <div class="data-row"><span class="data-label">Callsign</span><span class="data-value">UA1492</span></div>
+            <div class="data-row"><span class="data-label">Type</span><span class="data-value">B738</span></div>
+            <div class="data-row"><span class="data-label">Altitude</span><span class="data-value">32,000 ft</span></div>
+            <div class="data-row"><span class="data-label">Ground Speed</span><span class="data-value">450 kts</span></div>
+            <div class="data-row"><span class="data-label">Heading</span><span class="data-value">045°</span></div>
+            <div class="action-buttons">
+                <div class="btn btn-primary">Direct</div>
+                <div class="btn">Handoff</div>
+            </div>
+        </div>
+        
+        <!-- Alerts Card -->
+        <div class="card">
+            <div class="card-header">⚠ Active Alerts</div>
+            <div class="alert-box">
+                <div class="alert-title">Conflict Prediction</div>
+                <div class="alert-desc">UA1492 & DL88 converging in 4m</div>
+            </div>
+            <div class="alert-box" style="border-color: var(--text-muted); background: rgba(255,255,255,0.05);">
+                <div class="alert-title" style="color: var(--text-main)">Weather Update</div>
+                <div class="alert-desc">Moderate turbulence reported FL300-340</div>
+            </div>
+        </div>
+        
+        <!-- Sector Traffic Card -->
+        <div class="card">
+            <div class="card-header">Sector Traffic</div>
+            <table class="table">
+                <tr><th>FLT</th><th>ALT</th><th>SPD</th></tr>
+                <tr><td class="text-green">UA1492</td><td>320</td><td>450</td></tr>
+                <tr><td>DL88</td><td>310</td><td>440</td></tr>
+                <tr><td>AA405</td><td>350</td><td>465</td></tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

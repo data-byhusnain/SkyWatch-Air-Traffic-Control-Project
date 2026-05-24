@@ -1,0 +1,55 @@
+
+/* Full Screen Map Base Layer */
+.map-container-wrapper {
+  position: relative;
+  z-index: 1;
+  background-color: #e2e8f0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-root {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+
+
+
+
+
+.map-root .leaflet-control-attribution {
+  border-radius: 8px;
+  background: var(--bg-glass-strong);
+  color: var(--text-muted);
+  font-size: 10px;
+  padding: 4px 8px;
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border-light);
+}
+
+.custom-airplane-icon {
+  transition: filter 0.2s ease, transform 0.2s ease;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+/* Removed aircraftFloat animation because it overrides Leaflet's transform: translate3d positioning */
+
+.leaflet-tooltip.aircraft-tooltip {
+  background: var(--bg-glass-strong);
+  border: var(--glass-border);
+  color: var(--text-main);
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: var(--glass-shadow);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  backdrop-filter: var(--glass-blur);
+}
+
+.leaflet-tooltip.aircraft-tooltip::before {
+  border-top-color: rgba(255, 255, 255, 0.8);
+}
+
+

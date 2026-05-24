@@ -1,0 +1,120 @@
+/* Premium SaaS Navbar */
+.saas-navbar {
+  width: 100%;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--glass-border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+/* Brand */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2);
+}
+
+.brand-text {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.brand-suffix {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  color: var(--text-main);
+}
+
+.nav-btn.active {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Status Badge */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 20px;
+  color: #059669;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@media (max-width: 768px) {
+  .nav-container { padding: 0 16px; height: 60px; }
+  .nav-status { display: none; }
+  .brand-text { display: none; }
+}

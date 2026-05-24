@@ -1,0 +1,128 @@
+.alert-banner-container {
+  background: var(--bg-glass-strong);
+  backdrop-filter: var(--glass-blur);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  border: var(--glass-border);
+  overflow: hidden;
+}
+
+.alert-scroll-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.alert-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.alert-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+}
+.alert-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+.alert-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.alert-box {
+  flex: 0 0 280px;
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  animation: slideInGlass 0.4s ease-out forwards;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alert-box:hover {
+  transform: translateY(-2px);
+}
+
+.alert-box-danger {
+  border-left: 4px solid var(--color-danger);
+  box-shadow: 0 10px 24px rgba(239, 68, 68, 0.15);
+}
+
+.alert-box-warning {
+  border-left: 4px solid var(--color-warn);
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.15);
+}
+
+.alert-icon-container {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.alert-box-danger .alert-icon-container {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--color-danger);
+}
+
+.alert-box-warning .alert-icon-container {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-warn);
+}
+
+.alert-icon-container svg {
+  width: 18px;
+  height: 18px;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alert-title {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.alert-box-danger .alert-title {
+  color: #fca5a5;
+}
+
+.alert-box-warning .alert-title {
+  color: #fcd34d;
+}
+
+.alert-desc {
+  color: var(--text-main);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.callsign-hl {
+  color: #ffffff;
+}
+
+.alert-distance {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.alert-distance strong {
+  color: var(--text-main);
+}
